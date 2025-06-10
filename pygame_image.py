@@ -12,6 +12,8 @@ def main():
     bg_img = pg.image.load("fig/pg_bg.jpg")
     bg_img2 = pg.image.load("fig/3.png")
     bg_img2 = pg.transform.flip(bg_img2,True,False)
+    kk_rct = bg_img2.get_rect()
+    kk_rct.center = 300,200
     bg_img3 = pg.transform.flip(bg_img,True,False)
     tmr = 0
     while True:
@@ -24,7 +26,16 @@ def main():
         screen.blit(bg_img, [-x+3200, 0])
         screen.blit(bg_img3, [-x+1600, 0])
         screen.blit(bg_img, [-x, 0])
-        screen.blit(bg_img2, [300, 200])
+        key_lis = pg.key.get_pressed()
+        if key_lis[pg.K_UP]:
+            kk_rct.move_ip((0,-1))
+        elif key_lis[pg.K_LEFT]:
+            kk_rct.move_ip((-1,0))
+        elif key_lis[pg.K_RIGHT]:
+            kk_rct.move_ip((1,0))
+        elif key_lis[pg.K_DOWN]:
+            kk_rct.move_ip((0,1))
+        screen.blit(bg_img2, kk_rct)
         pg.display.update()
         tmr += 1        
         clock.tick(200)
